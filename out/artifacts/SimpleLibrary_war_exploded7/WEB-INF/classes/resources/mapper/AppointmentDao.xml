@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Dao.AppointmentDao">
+    <insert id="insertAppointment">
+        INSERT  INTO MyBatis..appointment(book_id,student_id)VALUES (#{book_id},#{student_id})
+    </insert>
+    <select id="quaryAndReturn" resultType="com.Dao.AppointmentDao">
+        appointment.book_id,
+         appointment.student_id,
+          appointment.appoint_time,
+          book.book_id
+    </select>
+</mapper>

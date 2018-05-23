@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Dao.AppointmentDao">
+    <insert id="insertAppointment">
+        INSERT  INTO MyBatis..appointment(book_id,student_id)VALUES (#{book_id},#{student_id})
+    </insert>
+    <select id="quaryAndReturn" resultMap="map">
+        SELECT
+     appointment.appoint_time,
+  appointment.book_id,
+  appointment.student_id,
+
+  book.book_id,
+  book.name,
+
+        book.introd,
+        book.number
+        FROM  MyBatis..appointment, MyBatis..book
+        WHERE book.book_id=appointment.book_id AND appointment.student_id=#{studentId}
+
+
+
+    </select>
+    <resultMap id="map" type="com.entity.Appointment">
+        <id property="book_id" column="book_id"></id>
+        <id property="student_id" column="student_id"></id>
+        <result property="appointTime" column="appoint_time"></result>
+
+        <association property="book1" javaType="com.entity.book">
+            <id property="book_id" column="book_id"></id>
+            <result property="name" column="name"></result>
+            <result property="introd" column="introd"></result>
+            <result property="number" column="number"></result>
+        </association>
+    </resultMap>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Dao.BookDao">
+    <select id="qureyById" parameterType="int" resultType="com.entity.book" >
+        <!-- 具体的sql -->
+        SELECT
+        book_id,
+        name,
+        introd,
+        number,
+        book_like,
+        book_scan
+
+        FROM
+        MyBatis..book
+        WHERE
+        book_id = #{bookId}
+    </select>
+
+    <select id="querySome" parameterType="com.entity.book" resultType="com.entity.book">
+        SELECT book_id,name,introd,number FROM      MyBatis..book
+        <where>
+            <!-- <if test="name !=null and !&quot;&quot;.equals(name.trim())">  -->
+             name like '%${_parameter}%'
+            <!--  </if>   -->
+        </where>
+    </select>
+
+    <select id="queryAll" resultType="com.entity.book">
+        SELECT
+        book_id,
+        name,
+        introd,
+        number
+        FROM
+          MyBatis..book
+        ORDER BY
+        book_id
+
+    </select>
+
+    <update id="reduceNumber">
+        UPDATE MyBatis..book
+        SET number = number - 1
+        WHERE
+        book_id = #{bookId}
+        AND number > 0
+    </update>
+    <update id="reduceLike">
+            UPDATE MyBatis..book
+        SET book_like = book_like - 1
+        WHERE
+        book_id = #{bookId}
+        AND number > 0
+    </update>
+    <update id="addLike">
+        UPDATE MyBatis..book
+        SET book_like = book_like + 1
+        WHERE
+        book_id = #{bookId}
+
+    </update>
+    <select id="getCommentcount" parameterType="int" resultType="int">
+        SELECT
+        book_comment
+        FROM
+        MyBatis..book
+        WHERE
+        book_id = #{bookId}
+
+    </select>
+    <update id="addComment">
+        UPDATE MyBatis..book
+        SET book_comment = book_comment + 1
+        WHERE
+        book_id = #{bookId}
+
+    </update>
+
+</mapper>
